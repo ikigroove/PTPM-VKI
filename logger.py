@@ -5,7 +5,6 @@ class Logger:
     LOG_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
     DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 
-    @staticmethod
     def setup() -> logging.Logger:
         logging.basicConfig(
             level=logging.DEBUG,

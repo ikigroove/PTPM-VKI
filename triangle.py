@@ -33,6 +33,10 @@ class Triangle:
             self.triangle_type = "разносторонний"
             self.logger.info("Разносторонний треугольник")
 
+    def reset_coordinates(self) -> None:
+        self.coordinates = [(-2, -2), (-2, -2), (-2, -2)]
+        self.triangle_type = ""
+
     def _calculate_coordinates(self) -> None:
         c, b, a = self.c, self.b, self.a
         x = (c ** 2 + b ** 2 - a ** 2) / (2 * c)

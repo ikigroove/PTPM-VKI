@@ -15,7 +15,7 @@ def main() -> None:
     except (ValueError, TypeError) as e:
         logger.error(f"Ошибка ввода: {e}")
         triangle = Triangle(0, 0, 0, logger)
-        triangle.coordinates = [(-2, -2), (-2, -2), (-2, -2)]
+        triangle.reset_coordinates()
 
     print(f"\nТип треугольника: {triangle.triangle_type}")
     print(f"Координаты вершин: {triangle.coordinates}")
