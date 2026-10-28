@@ -1,7 +1,8 @@
 import sqlite3
+from config import DEFAULT_DB_PATH
 
 class DatabaseRepository:
-    def __init__(self, db_path: str = "database.db"):
+    def __init__(self, db_path: str = DEFAULT_DB_PATH):
         self.connection = sqlite3.connect(db_path)
         self.cursor = self.connection.cursor()
         self.create_table()
@@ -69,4 +70,7 @@ class DatabaseRepository:
             self.cursor.close()
         except Exception:
             pass
-        
+        try:
+            self.connection.close()
+        except Exception:
+            pass

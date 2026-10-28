@@ -1,23 +1,16 @@
-import requests
 import re
-from bs4 import BeautifulSoup
 from src.database import DatabaseRepository
+from src.loader import PageLoader
 
 class ForumParser():
 
-    def __init__(self):
-        self.repository = DatabaseRepository()
-        self.headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                          "AppleWebKit/537.36 (KHTML, like Gecko) "
-                          "Chrome/120.0.0.0 Safari/537.36",
-            "Accept-Language": "en-US,en;q=0.9",
-        }
+    def __init__(self, repository: DatabaseRepository, loader: PageLoader):
+        self.repository = repository
+        self.loader = loader
 
     def parse_page(self, url: str):
-        r = requests.get(url=url, headers=self.headers)
-        r.raise_for_status()
-        soup = BeautifulSoup(r.text, "lxml")
+
+        soup = self.loader.get_page(url)
 
         items = soup.select("li.comments-feed-item")
 
@@ -38,6 +31,8 @@ class ForumParser():
             id += 1
 
         self.__save_to_db(res, self.repository)
+
+        return res
         
     def __save_to_db(self, parsed_data: list, repository: DatabaseRepository):
         for id, comment_uuid, author, text in parsed_data:
