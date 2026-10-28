@@ -11,6 +11,7 @@ class DatabaseRepository:
             """
             CREATE TABLE IF NOT EXISTS Comments (
             id INTEGER PRIMARY KEY,
+            comment_uuid TEXT NOT NULL,
             name TEXT NOT NULL,
             message TEXT NOT NULL
             )"""
@@ -20,7 +21,7 @@ class DatabaseRepository:
     def get_by_id(self, comment_id: int):
         self.cursor.execute(
             """
-            SELECT name, message FROM Comments WHERE id = ?""",
+            SELECT comment_uuid, name, message FROM Comments WHERE id = ?""",
             (comment_id,)
         )
         row = self.cursor.fetchone()
@@ -31,7 +32,7 @@ class DatabaseRepository:
     def get_by_name(self, username: str):
         self.cursor.execute(
             """
-            SELECT id, message FROM Comments WHERE name = ?""",
+            SELECT id, comment_uuid, message FROM Comments WHERE name = ?""",
             (username,)
         )
         row = self.cursor.fetchone()
@@ -39,11 +40,11 @@ class DatabaseRepository:
             return None
         return row
 
-    def add(self, comment_id: int, username: str, message: str):
+    def add(self, comment_id: int, comment_uuid: str, username: str, message: str):
         self.cursor.execute(
             """
-            INSERT OR IGNORE INTO Comments (id, name, message) VALUES (?, ?, ?)""",
-            (comment_id, username, message)
+            INSERT OR IGNORE INTO Comments (id, comment_uuid, name, message) VALUES (?, ?, ?, ?)""",
+            (comment_id, comment_uuid, username, message)
         )
         self.connection.commit()
 
