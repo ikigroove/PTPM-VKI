@@ -15,7 +15,7 @@ class ForumParser():
         items = soup.select("li.comments-feed-item")
 
         res = []
-        id = 0
+        id = 1
 
         for li in items:
             li_id = li.get("id", "")

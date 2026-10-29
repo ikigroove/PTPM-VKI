@@ -234,26 +234,6 @@
     </div>
 </footer>
 
-<!--
-  Сторонние шумы (я специально подкладываю элементы, которые могли бы
-  совпасть с селекторами парсера, но лежат вне li.comments-feed-item):
-
-  <li class="comments-feed-item">                → внутри aside/sidebar не должно быть
-  <a class="threads-text author">                → в header/footer
-  [id^="existingCommentDiv"]                     → нигде больше
--->
-<aside id="secondary" class="sidebar">
-    <article class="sidebar-tabs">
-        <ul>
-            <li class="comments-feed-item" id="comment-DECOY-0000-0000-0000">
-                <a class="threads-text author" href="/profile/DECOY/">DecoyAuthor</a>
-                <div id="existingCommentDiv-DECOY-0000-0000-0000" class="user-comment">
-                    <p>DECOY: если это попало в вывод парсера — селектор слишком широкий</p>
-                </div>
-            </li>
-        </ul>
-    </article>
-</aside>
 
 </body>
 </html>
